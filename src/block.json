@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
-	"name": "paco-blocks/ejemplo-placeholder",
+	"name": "paco-blocks/ejemplo-placeholder-hover",
 	"version": "0.1.0",
-	"title": "Ejemplo Placeholder",
+	"title": "Ejemplo Placeholder Hover",
 	"category": "text",
 	"icon": "flag",
 	"description": "A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.",

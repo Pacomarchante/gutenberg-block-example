@@ -26,19 +26,25 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( { attributes, setAttributes, className } ) {
+export default function Edit( { attributes, setAttributes, isSelected } ) {
 	const blockProps = useBlockProps();
 	return (
-		<div { ...blockProps }>
-			<Placeholder
-				label={ __( 'Ejemplo de bloque', 'bloque' ) }
-				instructions={ __( 'Escribe el texto que quieres mostrar', 'bloque' ) }
-			>
-				<TextControl
-					value={ attributes.message }
-					onChange={ ( val ) => setAttributes( { message: val } ) }
-				/>
-			</Placeholder>
-		</div>
-	);
+		<div { ...useBlockProps() }>
+            { attributes.message && ! isSelected ? (
+                <div>{ attributes.message }</div>
+            ) : (
+                <Placeholder
+                    label="Gutenpride Block"
+                    instructions="Add your message"
+                >
+                    <TextControl
+                        value={ attributes.message }
+                        onChange={ ( val ) =>
+                            setAttributes( { message: val } )
+                        }
+                    />
+                </Placeholder>
+            ) }
+        </div>
+    );
 }
