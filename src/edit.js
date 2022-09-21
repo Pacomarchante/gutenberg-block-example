@@ -4,7 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/packages/packages-components/
  */
 import { __ } from '@wordpress/i18n';
-import { TextControl } from '@wordpress/components';
+import { TextControl, Placeholder } from '@wordpress/components';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -26,15 +26,19 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( { attributes, setAttributes } ) {
+export default function Edit( { attributes, setAttributes, className } ) {
 	const blockProps = useBlockProps();
 	return (
 		<div { ...blockProps }>
-			<TextControl
-				label={ __( 'Text', 'text-domain' ) }
-				value={ attributes.message }
-				onChange={ ( val ) => setAttributes( { message: val } ) }
-			/>
+			<Placeholder
+				label={ __( 'Ejemplo de bloque', 'bloque' ) }
+				instructions={ __( 'Escribe el texto que quieres mostrar', 'bloque' ) }
+			>
+				<TextControl
+					value={ attributes.message }
+					onChange={ ( val ) => setAttributes( { message: val } ) }
+				/>
+			</Placeholder>
 		</div>
 	);
 }
