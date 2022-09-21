@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Customblock
+ * Plugin Name:       Compiled Block
  * Description:       A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.
  * Version:           0.1.0
  * Requires at least: 5.9
@@ -10,7 +10,7 @@
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       customblock
  *
- * @package           create-block
+ * @package           paco-block
  */
 
 /**
@@ -21,6 +21,7 @@
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
 function create_block_customblock_block_init() {
-	register_block_type( __DIR__ . '/build/block.json' );
+	register_block_type( __DIR__ . '/blocks/ejemplo-placeholder/block.json' );
+	register_block_type( __DIR__ . '/blocks/placeholder-hover/block.json' );
 }
 add_action( 'init', 'create_block_customblock_block_init' );
