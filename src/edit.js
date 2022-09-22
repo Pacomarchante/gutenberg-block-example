@@ -14,9 +14,7 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import {
 	useBlockProps,
-	RichText,
-	AlignmentToolbar,
-	BlockControls,	
+	RichText,	
 } from '@wordpress/block-editor';
 
 /**
@@ -33,32 +31,18 @@ import {
  */
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
-	
+
 	const onChangeContent = ( newContent ) => {
 		setAttributes( { content: newContent } );
 	};
 
-	const onChangeAlignment = ( newAlignment ) => {
-		setAttributes( { alignment: newAlignment === undefined ? 'none' : newAlignment } );
-	};
-
 	return (
-		<div { ...blockProps }>
-			{
-				<BlockControls>
-					<AlignmentToolbar
-						value={ attributes.alignment }
-						onChange={ onChangeAlignment }
-					/>
-				</BlockControls>
-			}
-			<RichText
-				className={ attributes.alignment }
-				style={ { textAlign: attributes.alignment } }
-				tagName="h2"
-				onChange={ onChangeContent }
-				value={ attributes.content }
-			/>
-		</div>
+		<RichText
+			{ ...blockProps }
+			tagName="h2"
+			onChange={ onChangeContent }
+			value={ attributes.content }
+		/>
 	);
+
 }

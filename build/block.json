@@ -10,22 +10,40 @@
   "attributes": {
     "content": {
       "type": "string",
-      "source": "html",
-      "selector": "h2"
+      "source": "text",
+      "selector": "div",
+      "default": ""
     },
-    "aligment": {
+    "bg_color": {
       "type": "string",
-      "default": "none"
-    }
-  },
-  "example": {
-    "attribute": {
-      "content": "eHola Mundo",
-      "aligment": "right"
+      "default": "#000000"
+    },
+    "text_color": {
+      "type": "string",
+      "default": "#ffffff"
     }
   },
   "supports": {
-    "html": false
+    "color": {
+      "text": true,
+      "background": true,
+      "link": true
+    },
+    "anchor": true,
+    "align": true,
+    "spacing": {
+      "padding": true,
+      "margin": true,
+      "blockGap": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontStyle": true,
+      "fontWeight": true,
+      "textDecoration": true,
+      "textTransform": true
+    }
   },
   "textdomain": "customblock",
   "editorScript": "file:./index.js",

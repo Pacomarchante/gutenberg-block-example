@@ -1,8 +1,6 @@
 import {
 	useBlockProps, 
 	RichText,
-	AlignmentToolbar,
-	BlockControls,
 } from '@wordpress/block-editor';
 
 export default function save( {attributes} ) {
@@ -10,13 +8,11 @@ export default function save( {attributes} ) {
 	console.log(attributes);
 	return (
 
-		<div { ...blockProps }>
-			<RichText.Content
-				className={ `has-text-align-${attributes.alignment}` }
-				tagName="h2"
-				value={ attributes.content }
-			/>
-		</div>
+		<RichText.Content
+			{ ...blockProps }
+			tagName="h2"
+			value={ attributes.content }
+		/>
 
 	);
 }
