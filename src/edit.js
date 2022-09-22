@@ -12,7 +12,12 @@ import { __ } from '@wordpress/i18n';
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	RichText,
+	AlignmentToolbar,
+	BlockControls,	
+} from '@wordpress/block-editor';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -28,14 +33,32 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  */
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
+	
+	const onChangeContent = ( newContent ) => {
+		setAttributes( { content: newContent } );
+	};
+
+	const onChangeAlignment = ( newAlignment ) => {
+		setAttributes( { alignment: newAlignment === undefined ? 'none' : newAlignment } );
+	};
+
 	return (
-		<RichText
-			{ ...blockProps }
-			tagName="h2"
-			value={ attributes.content }
-			allowedFormats = { [ 'core/bold', 'core/italic' ] }
-			onChange={ ( val ) => setAttributes( { content:val } ) }
-			placeholder={ __( 'Write something…', 'my-plugin' ) }
-		/>
+		<div { ...blockProps }>
+			{
+				<BlockControls>
+					<AlignmentToolbar
+						value={ attributes.alignment }
+						onChange={ onChangeAlignment }
+					/>
+				</BlockControls>
+			}
+			<RichText
+				className={ attributes.alignment }
+				style={ { textAlign: attributes.alignment } }
+				tagName="h2"
+				onChange={ onChangeContent }
+				value={ attributes.content }
+			/>
+		</div>
 	);
 }

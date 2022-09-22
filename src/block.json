@@ -12,6 +12,16 @@
 			"type": "string",
 			"source": "html",
 			"selector": "h2"
+		},
+		"aligment": {
+			"type": "string",
+			"default": "none"
+		}
+	},
+	"example": {
+		"attribute": {
+			"content": "eHola Mundo",
+			"aligment": "right"
 		}
 	},
 	"supports": {
