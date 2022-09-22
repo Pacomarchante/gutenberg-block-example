@@ -10,17 +10,11 @@
   "attributes": {
     "content": {
       "type": "string",
-      "source": "text",
-      "selector": "div",
-      "default": ""
+      "source": "text"
     },
-    "bg_color": {
-      "type": "string",
-      "default": "#000000"
-    },
-    "text_color": {
-      "type": "string",
-      "default": "#ffffff"
+    "isChecked": {
+      "type": "boolean",
+      "default": true
     }
   },
   "supports": {
