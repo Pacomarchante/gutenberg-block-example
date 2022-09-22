@@ -1,18 +1,17 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 2,
-  "name": "create-block/customblock",
+  "name": "create-block/richtext",
   "version": "0.1.0",
-  "title": "Customblock",
+  "title": "RichText",
   "category": "text",
   "icon": "flag",
   "description": "A Gutenberg block to show your pride! This block enables you to type text and style it with the color font Gilbert from Type with Pride.",
   "attributes": {
-    "message": {
+    "content": {
       "type": "string",
-      "source": "text",
-      "selector": "div",
-      "default": "Hello World!"
+      "source": "html",
+      "selector": "h2"
     }
   },
   "supports": {

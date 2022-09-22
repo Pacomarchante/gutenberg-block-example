@@ -4,7 +4,6 @@
  * @see https://developer.wordpress.org/block-editor/packages/packages-components/
  */
 import { __ } from '@wordpress/i18n';
-import { TextControl } from '@wordpress/components';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -12,7 +11,8 @@ import { TextControl } from '@wordpress/components';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -29,12 +29,13 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
 	return (
-		<div { ...blockProps }>
-			<TextControl
-				label={ __( 'Text', 'text-domain' ) }
-				value={ attributes.message }
-				onChange={ ( val ) => setAttributes( { message: val } ) }
-			/>
-		</div>
+		<RichText
+			{ ...blockProps }
+			tagName="h2"
+			value={ attributes.content }
+			allowedFormats = { [ 'core/bold', 'core/italic' ] }
+			onChange={ ( val ) => setAttributes( { content:val } ) }
+			placeholder={ __( 'Write something…', 'my-plugin' ) }
+		/>
 	);
 }
