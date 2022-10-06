@@ -20,7 +20,45 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function create_block_customblock_block_init() {
-	register_block_type( __DIR__ . '/build/block.json' );
+function gutenberg_examples_dynamic_block_block_init() {
+
+	register_block_type(
+		__DIR__ . '/build/block.json',
+		array(
+			'render_callback' => 'gutenberg_examples_dynamic_block_render_callback',
+		)
+	);
 }
-add_action( 'init', 'create_block_customblock_block_init' );
+add_action( 'init', 'gutenberg_examples_dynamic_block_block_init' );
+
+
+/**
+ * This function is called when the block is being rendered on the front end of the site
+ *
+ * @param array    $attributes     The array of attributes for this block.
+ * @param string   $content        Rendered block output. ie. <InnerBlocks.Content />.
+ * @param WP_Block $block_instance The instance of the WP_Block class that represents the block being rendered.
+ */
+function gutenberg_examples_dynamic_block_render_callback( $attributes, $content, $block_instance ) {
+	// ob_start();
+	// /**
+	//  * Keeping the markup to be returned in a separate file is sometimes better, especially if there is very complicated markup.
+	//  * All of passed parameters are still accessible in the file.
+	//  */
+	// // require plugin_dir_path( __FILE__ ) . 'template.php';
+	// return ob_get_clean();
+	$recent_posts = wp_get_recent_posts( array(
+        'numberposts' => 1,
+        'post_status' => 'publish',
+    ) );
+    if ( count( $recent_posts ) === 0 ) {
+        return 'No posts';
+    }
+    $post = $recent_posts[ 0 ];
+    $post_id = $post['ID'];
+    return sprintf(
+        '<a class="wp-block-my-plugin-latest-post" href="%1$s">%2$s</a>',
+        esc_url( get_permalink( $post_id ) ),
+        esc_html( get_the_title( $post_id ) )
+    );
+}

@@ -1,17 +1,5 @@
-/**
- * WordPress components that create the necessary UI elements for the block
- *
- * @see https://developer.wordpress.org/block-editor/packages/packages-components/
- */
-import { __ } from '@wordpress/i18n';
-import { TextControl } from '@wordpress/components';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
+import { registerBlockType } from '@wordpress/blocks';
+import { useSelect } from '@wordpress/data';
 import { useBlockProps } from '@wordpress/block-editor';
 
 /**
@@ -28,13 +16,19 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
+	const posts = useSelect( ( select ) => {
+		return select( 'core' ).getEntityRecords( 'postType', 'post' );
+	}, [] );
+
 	return (
 		<div { ...blockProps }>
-			<TextControl
-				label={ __( 'Text', 'text-domain' ) }
-				value={ attributes.message }
-				onChange={ ( val ) => setAttributes( { message: val } ) }
-			/>
+			{ ! posts && 'Loading...' }
+			{posts && posts.length === 0 && 'No posts found.'}
+			{posts && posts.length > 0 && (
+				<a href={ posts[0].link }>
+					{posts[0].title.rendered}
+				</a>
+			)}
 		</div>
 	);
 }
